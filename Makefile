@@ -4,7 +4,7 @@ DISTNAME=	stack-dependencies-${STACK_VERSION}
 ${DISTNAME}.tar.gz:
 	mkdir -p ${DISTNAME}
 	env HOME=${DISTNAME} cabal update
-	env HOME=${DISTNAME} cabal fetch stack
+	env HOME=${DISTNAME} cabal fetch stack==${STACK_VERSION}
 	tar -cvf ${DISTNAME}.tar ${DISTNAME}
 	gzip ${DISTNAME}.tar
 
