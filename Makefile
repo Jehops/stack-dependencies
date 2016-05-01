@@ -38,9 +38,9 @@ _stack.zsh: _stack.bash
 
 install: all
 	${INSTALL_PROGRAM} stack ${STAGEDIR}${PREFIX}/bin
-	${MKDIR} ${PREFIX}/etc/bash_completion.d
+	${MKDIR} ${STAGEDIR}${PREFIX}/etc/bash_completion.d
 	${INSTALL_DATA} _stack.bash ${STAGEDIR}${PREFIX}/etc/bash_completion.d/_stack.bash
-	${MKDIR} ${STAGEDIR}/share/zsh/site-functions/_stack
+	${MKDIR} ${STAGEDIR}${PREFIX}/share/zsh/site-functions/_stack
 	${INSTALL_DATA} _stack.zsh ${STAGEDIR}${PREFIX}/share/zsh/site-functions/_stack
 
 ${DISTNAME}.tar.gz:
