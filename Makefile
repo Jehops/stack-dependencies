@@ -11,6 +11,7 @@ INSTALL_PROGRAM?=	install -s -m 555
 INSTALL_DATA?=	install -m 0644
 PREFIX?=	/usr/local
 TARGET?=	${PWD}/${DISTNAME}
+STAGEDIR?=
 SETENV?=	env
 
 STACK_VERSION=	1.0.4.3
@@ -36,11 +37,11 @@ _stack.zsh: _stack.bash
 	${CAT} ${>} >> ${@}
 
 install: all
-	${INSTALL_PROGRAM} stack ${PREFIX}/bin
+	${INSTALL_PROGRAM} stack ${STAGEDIR}${PREFIX}/bin
 	${MKDIR} ${PREFIX}/etc/bash_completion.d
-	${INSTALL_DATA} _stack.bash ${PREFIX}/etc/bash_completion.d/_stack.bash
+	${INSTALL_DATA} _stack.bash ${STAGEDIR}${PREFIX}/etc/bash_completion.d/_stack.bash
 	${MKDIR} ${STAGEDIR}/share/zsh/site-functions/_stack
-	${INSTALL_DATA} _stack.zsh ${PREFIX}/share/zsh/site-functions/_stack
+	${INSTALL_DATA} _stack.zsh ${STAGEDIR}${PREFIX}/share/zsh/site-functions/_stack
 
 ${DISTNAME}.tar.gz:
 	${MKDIR} -p ${DISTNAME}
