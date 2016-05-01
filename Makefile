@@ -5,6 +5,7 @@ FALSE?=	false
 GZIP?=	gzip
 MKDIR?=	mkdir -p
 RM?=	rm
+SED?=	sed
 TAR?=	tar
 INSTALL_PROGRAM?=	install -s -m 555
 INSTALL_DATA?=	install -m 0644
@@ -19,6 +20,8 @@ all: stack _stack.bash _stack.zsh
 
 stack:
 	@[ -d ${TARGET}/.cabal ] || ${FALSE}
+# Make sure we use absolute paths in the cabal config file
+	${SED} -i "" -e 's|${DISTNAME}/|${TARGET}/|g' ${TARGET}/.cabal/config
 	${SETENV} HOME="${TARGET}" cabal install stack==${STACK_VERSION}
 	${CP} ${TARGET}/.cabal/bin/stack stack
 
@@ -47,6 +50,7 @@ ${DISTNAME}.tar.gz:
 	${GZIP} ${DISTNAME}.tar
 
 clean:
-	${RM} -rf ${DISTNAME} ${DISTNAME}.tar ${DISTNAME}.tar.gz .cabal
+	${RM} -rf ${DISTNAME} ${DISTNAME}.tar ${DISTNAME}.tar.gz \
+		_stack.zsh _stack.bash stack
 
 .PHONY:	clean
