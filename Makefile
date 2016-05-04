@@ -14,7 +14,7 @@ TARGET?=	${PWD}/${DISTNAME}
 STAGEDIR?=
 SETENV?=	env
 
-STACK_VERSION=	1.0.4.3
+STACK_VERSION=	1.1.0
 DISTNAME=	stack-dependencies-${STACK_VERSION}
 
 all: stack _stack.bash _stack.zsh
