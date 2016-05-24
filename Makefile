@@ -14,7 +14,7 @@ TARGET?=	${PWD}/${DISTNAME}
 STAGEDIR?=
 SETENV?=	env
 
-STACK_VERSION=	1.1.0
+STACK_VERSION=	1.1.2
 DISTNAME=	stack-dependencies-${STACK_VERSION}
 
 all: stack _stack.bash _stack.zsh
@@ -42,6 +42,8 @@ install: all
 	${INSTALL_DATA} _stack.bash ${STAGEDIR}${PREFIX}/etc/bash_completion.d/_stack.bash
 	${MKDIR} ${STAGEDIR}${PREFIX}/share/zsh/site-functions
 	${INSTALL_DATA} _stack.zsh ${STAGEDIR}${PREFIX}/share/zsh/site-functions/_stack
+
+bundle: ${DISTNAME}.tar.gz
 
 ${DISTNAME}.tar.gz:
 	${MKDIR} -p ${DISTNAME}
