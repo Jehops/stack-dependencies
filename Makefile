@@ -14,7 +14,7 @@ TARGET?=	${PWD}/${DISTNAME}
 STAGEDIR?=
 SETENV?=	env
 
-STACK_VERSION=	1.2.0
+STACK_VERSION=	1.3.0
 DISTNAME=	stack-dependencies-${STACK_VERSION}
 
 all: stack _stack.bash _stack.zsh
@@ -23,7 +23,7 @@ stack:
 	@[ -d ${TARGET}/.cabal ] || ${FALSE}
 # Make sure we use absolute paths in the cabal config file
 	${SED} -i "" -e 's|${DISTNAME}/|${TARGET}/|g' ${TARGET}/.cabal/config
-	${SETENV} HOME="${TARGET}" cabal install stack==${STACK_VERSION}
+	${SETENV} HOME="${TARGET}" cabal install stack==${STACK_VERSION} || cat ${TARGET}/.cabal/logs/* || true
 	${CP} ${TARGET}/.cabal/bin/stack stack
 
 _stack.bash: stack
